@@ -55,6 +55,7 @@ class Cart extends Component {
         }
         else {
             onDeleteProductInCart(product);
+            onChangeMessage(message.MSG_DELETE_PRODUCT_IN_CARD_SUCCESS);
         }
     }
     onDelete = (product) => {
