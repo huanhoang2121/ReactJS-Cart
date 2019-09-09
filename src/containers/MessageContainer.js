@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-// import * as Message from "./../constants/Message";
 import Message from "./../components/Message";
 import PropTypes from "prop-types";
-// import { actChangeMessage } from '../actions';
 
 class MessageContainer extends Component {
     render() {
@@ -24,11 +22,4 @@ const mapStateToProps = state => {
     }
 }
 
-// const mapDispatchToProps = (dispatch, message) => {
-//     return {
-//         onAddToCart :(message) => {
-//             dispatch(actChangeMessage(message));
-//         }
-//     }
-// }
 export default connect(mapStateToProps, null)(MessageContainer);

@@ -5,6 +5,7 @@ import Cart from "./../components/Cart";
 import CartResult from "./../components/CartResult";
 import * as Message from "./../constants/Message";
 import PropTypes from "prop-types";
+import { actDeleteProductInCart, actChangeMessage, actUpdateProductInCart } from '../actions';
 
 class CartContainer extends Component {
     render() {
@@ -17,6 +18,8 @@ class CartContainer extends Component {
         );
     }
     showCart = (carts) => {
+        var { onDeleteProductInCart, onUpdateProductInCart, onChangeMessage } = this.props;
+
         var result = <tr>
             <td>
                 {Message.MSG_CART_EMPTY}
@@ -28,6 +31,9 @@ class CartContainer extends Component {
                     <Cart
                         key={index}
                         cart={cart}
+                        onDeleteProductInCart={onDeleteProductInCart}
+                        onUpdateProductInCart={onUpdateProductInCart}
+                        onChangeMessage={onChangeMessage}
                     />
                 )
             });
@@ -55,7 +61,10 @@ CartContainer.propTypes = {
             rating: PropTypes.number.isRequired
         }).isRequired,
         quantity: PropTypes.number.isRequired
-    })).isRequired
+    })).isRequired,
+    onChangeMessage : PropTypes.func.isRequired,
+    onUpdateProductInCart : PropTypes.func.isRequired,
+    onDeleteProductInCart : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -64,4 +73,18 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(CartContainer);
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onUpdateProductInCart: (product, quantity) => {
+            dispatch(actUpdateProductInCart(product, quantity));
+        },
+        onDeleteProductInCart: (product) => {
+            dispatch(actDeleteProductInCart(product));
+        },
+        onChangeMessage: (message) => {
+            dispatch(actChangeMessage(message));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

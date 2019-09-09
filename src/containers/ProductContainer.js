@@ -43,7 +43,8 @@ ProductContainer.propTypes = {
             rating : PropTypes.number.isRequired
         })
     ).isRequired,
-    onChangeMessage : PropTypes.func.isRequired
+    onChangeMessage : PropTypes.func.isRequired,
+    onAddToCart : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -58,7 +59,7 @@ const mapDispatchToProps = (dispatch, product) => {
             dispatch(actAddToCart(product, 1));
         },
         onChangeMessage :(message) => {
-            dispatch(actChangeMessage(message, 1));
+            dispatch(actChangeMessage(message));
         }
     }
 }
